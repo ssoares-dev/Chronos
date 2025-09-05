@@ -1,0 +1,11 @@
+.mainForm{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--gray-100);
+    flex-wrap: wrap;
+}

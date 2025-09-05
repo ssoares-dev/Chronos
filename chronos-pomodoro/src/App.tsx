@@ -1,60 +1,37 @@
-import { Container } from "./components/Container";
-import { Logo } from "./components/Logo";
-import { Menu } from "./components/Menu";
-import { CountDown } from "./components/CountDown";
-import { DefaultInput } from "./components/DefaultInput";
-import { Cycles } from "./components/Cycles";
+import { Home } from "./Pages/Home";
+/* import { NotFound } from "./Pages/NotFound";
+import { AboutPomodoro } from "./Pages/AboutPomodoro"; */
+
+import { useState } from "react";
 
 import "./styles/global.css";
 import "./styles/theme.css";
-import { DefaultButton } from "./components/DefaultButton";
-import { PlayCircleIcon } from "lucide-react";
+import type { TaskStateModel } from "./models/TaskStateModel";
+import { TaskContextProvider } from "./Contexts/TaskContext";
 
+const initialState: TaskStateModel = {
+  tasks: [],
+  secondsRemaining: 0,
+  formattedSecondsRemaining: "00:00",
+  activeTask: null,
+  currentCycle: 0,
+  config: {
+    workTime: 25,
+    shortBreakTime: 5,
+    longBreakTime: 15,
+  },
+};
 
 
 export function App() {
-  return (
-    <>
-      <Container>
-        <Logo />
-      </Container>
-      <Container>
-        <Menu />
-      </Container>
-      <Container>
-        <CountDown />
-      </Container>
-      <Container>
-        <form className="form" action="">
-          <div className="formRow">
-            <DefaultInput
-              labelText="Task"
-              id="task"
-              placeholder="Enter task"
-              type="text"
-            />
-          </div>
 
-          <div className="formRow">
-            <p>Duration</p>
-          </div>
+  const [state, setState] = useState(initialState);
 
-          <div className="formRow">
-            <Cycles />
-          </div>
-
-          <div className="formRow">
-            <DefaultButton
-              id="submit"
-              type="submit"
-              icon={<PlayCircleIcon />}
-              color="green"
-            />
-          </div>
-        </form>
-      </Container>
-    </>
-  );
+  return(
+    <TaskContextProvider>
+      <Home />
+    </TaskContextProvider>
+  )
 }
 
 export default App;
